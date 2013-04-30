@@ -5,7 +5,7 @@
   "homepage": "https://github.com/jgallen23/hover-hero",
   "license": "MIT",
   "copyright": "Greg Allen",
-  "main": "dist/hover-hero.js",
+  "main": "dist/fidel.hoverhero.js",
   "dependencies": {
     "jquery": "~1.9.0",
     "fidel": "~2.2.1"

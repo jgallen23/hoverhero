@@ -1,0 +1,20 @@
+.hover-hero ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.hover-hero .main {
+  position: relative;
+}
+.hover-hero .main li {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.hover-hero .main .default {
+  display: block;
+}
+.hover-hero .sidebar {
+  float: right;
+}

@@ -23,8 +23,15 @@ module.exports = function(grunt) {
         banner: '<%= meta.banner %>'
       },
       dist: {
-        src: 'lib/hover-hero.js',
-        dest: 'dist/hover-hero.js'
+        src: [
+          'components/fidel/dist/fidel.js',
+          'lib/hoverhero.js'
+        ],
+        dest: 'dist/hoverhero.js'
+      },
+      fidel: {
+        src: 'lib/hoverhero.js',
+        dest: 'dist/fidel.hoverhero.js'
       }
     },
     uglify: {
@@ -32,21 +39,32 @@ module.exports = function(grunt) {
         banner: '<%= meta.banner %>'
       },
       dist: {
-        src: 'dist/hover-hero.js',
-        dest: 'dist/hover-hero.min.js'
+        src: 'dist/hoverhero.js',
+        dest: 'dist/hoverhero.min.js'
+      },
+      fidel: {
+        src: 'dist/fidel.hoverhero.js',
+        dest: 'dist/fidel.hoverhero.min.js'
+      }
+    },
+    less: {
+      styles: {
+        files: {
+          'dist/hoverhero.css': 'lib/hoverhero.less'
+        }
       }
     },
     watch: {
-      main: {
-        files: '<%= jshint.main %>',
-        tasks: 'default' 
-      },
-      ci: {
+      scripts: {
         files: [
           '<%= jshint.main %>',
           'test/index.html'
         ],
-        tasks: ['default', 'mocha']
+        tasks: ['scripts', 'mocha']
+      },
+      styles: {
+        files: 'lib/*.less',
+        tasks: ['styles']
       }
     },
     mocha: {
@@ -90,11 +108,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-reloadr');
   grunt.loadNpmTasks('grunt-plato');
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'mocha']);
-  grunt.registerTask('dev', ['connect:server', 'reloadr', 'watch:main']);
-  grunt.registerTask('ci', ['connect:server', 'watch:ci']);
+  grunt.registerTask('default', ['styles', 'scripts', 'mocha']);
+  grunt.registerTask('scripts', [ 'jshint', 'concat', 'uglify']);
+  grunt.registerTask('styles', ['less']);
+  grunt.registerTask('dev', ['connect:server', 'reloadr', 'watch']);
+  grunt.registerTask('ci', ['connect:server', 'watch:scripts']);
   grunt.registerTask('reports', ['plato', 'connect:plato']);
 };

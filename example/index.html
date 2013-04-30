@@ -3,9 +3,44 @@
   <head>
     <meta charset="utf-8" />
     <title>hover-hero example</title>
+    <link rel="stylesheet" href="../dist/hoverhero.css"/>
+    <style>
+      .hover-hero {
+        width: 850px;
+      }
+      .main li {
+        width: 600px;
+        height: 350px;
+        color: #fff;
+        font-size: 28px;
+      }
+      .sidebar li {
+        margin: 12px 0 0 0;
+      }
+      .sidebar li:first-child {
+        margin: 0;
+      }
+    </style>
   </head>
   <body>
-
-    <script src="../dist/hover-hero.js"></script>
+    <div id="hero" class="hover-hero">
+      <ul class="sidebar">
+        <!--<li><img src="../example/imgs/3-thumb.jpg"/></li>-->
+        <li><img src="imgs/4-thumb.jpg"/></li>
+        <li><img src="imgs/6-thumb.jpg"/></li>
+        <li><img src="imgs/8-thumb.jpg"/></li>
+      </ul>
+      <ul class="main">
+        <li class="default" style="background: url(imgs/3-large.jpg) no-repeat;">Hi, my name is Gato.</li>
+        <li><img src="imgs/4-large.jpg"/></li>
+        <li><img src="imgs/6-large.jpg"/></li>
+        <li><img src="imgs/8-large.jpg"/></li>
+      </ul>
+    </div>
+    <script src="../components/jquery/jquery.js"></script>
+    <script src="../dist/hoverhero.js"></script>
+    <script>
+      $('#hero').hoverHero();
+    </script>
   </body>
 </html>

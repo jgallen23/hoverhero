@@ -1,7 +1,7 @@
 /*!
- * hover-hero - Hero Module similar to the Apple App Store
- * v0.1.0
- * https://github.com/jgallen23/hover-hero
+ * hoverhero - Hero Module similar to the Apple App Store
+ * v0.0.1
+ * https://github.com/jgallen23/hoverhero
  * copyright Greg Allen 2013
  * MIT License
 */

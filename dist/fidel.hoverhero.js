@@ -1,6 +1,6 @@
 /*!
  * hoverhero - Hero Module similar to the Apple App Store
- * v0.0.2
+ * v0.0.3
  * https://github.com/jgallen23/hoverhero
  * copyright Greg Allen 2013
  * MIT License
@@ -33,7 +33,7 @@
       }
       var self = this;
       this.timeout = setTimeout(function() {
-        var itemHide = self.main.find('li:visible');
+        var itemHide = self.main.children('li:visible');
         var itemShow;
 
         if (typeof index !== 'number') {
@@ -44,7 +44,7 @@
           itemShow = self.main.find('.default');
           self.defaultVisible = true;
         } else {
-          itemShow = self.main.find('li:eq('+(index+1)+')');
+          itemShow = self.main.children('li:eq('+(index+1)+')');
           self.defaultVisible = false;
         }
 

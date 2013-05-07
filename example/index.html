@@ -40,7 +40,14 @@
     <script src="../components/jquery/jquery.js"></script>
     <script src="../dist/hoverhero.js"></script>
     <script>
-      $('#hero').hoverHero();
+      $('#hero')
+        .hoverHero()
+        .on('heroShow', function(item) {
+          console.log('show', item);
+        })
+        .on('heroHide', function(item) {
+          console.log('hide', item);
+        });
     </script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 /*!
  * hoverhero - Hero Module similar to the Apple App Store
- * v0.0.1
+ * v0.0.2
  * https://github.com/jgallen23/hoverhero
  * copyright Greg Allen 2013
  * MIT License
@@ -206,7 +206,11 @@ w.Fidel = Fidel;
 
     events: {
       'mouseenter .sidebar li': 'onSidebarHover',
-      'mouseleave': 'showDefault'
+      'mouseleave': 'showItem'
+    },
+
+    init: function() {
+      this.defaultVisible = true;
     },
 
     onSidebarHover: function(e) {
@@ -215,17 +219,35 @@ w.Fidel = Fidel;
       this.showItem(index);
     },
 
-    showDefault: function(callback) {
-      if (typeof callback !== 'function') {
-        callback = function() {};
-      }
-      this.main.find('li:visible').not('.default').fadeOut();
-      this.main.find('.default').fadeIn();
-    },
-
     showItem: function(index) {
-      this.main.find('li:visible').fadeOut();
-      this.main.find('li:eq('+(index+1)+')').fadeIn();
+      if (this.timeout) {
+        clearTimeout(this.timeout);
+      }
+      var self = this;
+      this.timeout = setTimeout(function() {
+        var itemHide = self.main.find('li:visible');
+        var itemShow;
+
+        if (typeof index !== 'number') {
+          if (self.defaultVisible) {
+            return;
+          }
+          itemHide.not('.default');
+          itemShow = self.main.find('.default');
+          self.defaultVisible = true;
+        } else {
+          itemShow = self.main.find('li:eq('+(index+1)+')');
+          self.defaultVisible = false;
+        }
+
+        if (itemHide.length !== 0) {
+          itemHide.fadeOut();
+          self.el.trigger('heroHide', itemHide);
+        }
+
+        itemShow.fadeIn();
+        self.el.trigger('heroShow', itemShow);
+      }, 200);
     }
 
   });
